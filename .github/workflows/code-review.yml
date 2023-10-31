@@ -19,7 +19,7 @@ jobs:
             const prNumber = context.payload.pull_request.number;
             const owner = context.repo.owner;
             const repo = context.repo.repo;
-            const reviewers = ["username1", "username2"];  // Add reviewers' usernames here
+            const reviewers = ["Asb16", "Asb16"];  // Add reviewers' usernames here
 
             for (const reviewer of reviewers) {
               github.pulls.createReviewRequest({
