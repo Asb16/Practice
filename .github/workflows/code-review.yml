@@ -1,0 +1,32 @@
+name: Automated Code Review Request
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize  # Trigger when pull requests are updated
+
+jobs:
+  code-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Request Code Review
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const reviewers = ["username1", "username2"];  // Add reviewers' usernames here
+
+            for (const reviewer of reviewers) {
+              github.pulls.createReviewRequest({
+                owner,
+                repo,
+                pull_number: prNumber,
+                reviewers: [reviewer],
+              });
+            }
+
