@@ -1,0 +1,14 @@
+
+---
+name: Bug Report
+about: Create a bug report to help us improve
+title: 'Bug: '
+
+lables:
+  - bug
+
+assignees:
+  - @username
+---
+
+Describe the bug here.
