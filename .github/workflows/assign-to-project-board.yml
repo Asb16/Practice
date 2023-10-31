@@ -13,19 +13,21 @@ on:
 jobs:
   assign-to-project-board:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Assign to Project Board
         run: |
+          # Define the project board name
+          PROJECT_BOARD_NAME="Your Project Board Name"
 
-          PROJECT_BOARD_NAME="Feature Project"
-
+          # Extract the issue/pull request number
           PR_NUMBER=$(echo $GITHUB_REF | awk -F/ '{print $NF}')
 
+          # Use the GitHub API to add the issue/pull request to the project board
           curl -X POST \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github.inertia-preview+json" \
             -d "{\"content_id\": $PR_NUMBER, \"content_type\": \"PullRequest\"}" \
-            "https://api.github.com/projects/coloumns/<PROJECT_COLUMN_ID>/cards"
+            "https://api.github.com/projects/columns/<PROJECT_COLUMN_ID>/cards"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
