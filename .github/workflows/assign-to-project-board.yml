@@ -18,6 +18,8 @@ jobs:
       - name: Assign to Project Board
         run: |
 
+          PROJECT_BOARD_NAME="Feature Project"
+
           PR_NUMBER=$(echo $GITHUB_REF | awk -F/ '{print $NF}')
 
           curl -X POST \
